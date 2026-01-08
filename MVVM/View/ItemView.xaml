@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="WarframeWork.MVVM.View.ItemView">
+    <Border Stroke="Black"
+            StrokeThickness="5">
+        <Grid BackgroundColor="DimGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollView MinimumWidthRequest="500"
+                    Grid.Row="0"
+                    HorizontalOptions="Fill"
+                    BackgroundColor="DimGray">
+                <VerticalStackLayout WidthRequest="500"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Padding="3"
+                                 Spacing="3">
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Label Text="{Binding ItemBase.name}"/>
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding ItemBase.uniqueName, StringFormat='Unique Name: {0}'}"/>
+
+                    <Label Text="{Binding ItemBase.description,StringFormat='Description: {0}'}"
+                           LineBreakMode="WordWrap"/>
+                    <Label Text="{Binding ItemBase.type, StringFormat='Type: {0}'}"/>
+                    <Label Text="{Binding ItemBase.category, StringFormat='category: {0}'}"/>
+                    <HorizontalStackLayout>
+                        <Label Text="components:"/>
+                        <CollectionView 
+                        x:Name="retrievedCollection"
+                        x:FieldModifier="public"
+                        SelectionMode="Single"
+                        SelectionChanged="itemSelected"
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="10,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0"
+                                           Text="{Binding name}"/>
+                                        <Label Grid.Column="1"
+                                           Text="{Binding uniqueName}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding ItemBase.productCategory, StringFormat='Product Category: {0}'}"/>
+                </VerticalStackLayout>
+            </ScrollView>
+            <Button Text="close"
+                Clicked="closeClicked"
+                Grid.Row="1"
+                HeightRequest="25"
+                WidthRequest="75"
+                    HorizontalOptions="Start"/>
+        </Grid>
+    </Border>
+</toolkit:Popup>

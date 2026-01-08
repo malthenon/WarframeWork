@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:WarframeWork.Pages"
+             xmlns:views="clr-namespace:WarframeWork.MVVM.View"
+             x:Class="WarframeWork.Pages.FlyoutMenuPage"
+             Title="FlyoutMenuPage">
+    <CollectionView x:Name="flyoutCollectionView"
+                    x:FieldModifier="public"
+                    SelectionMode="Single">
+        <CollectionView.ItemsSource>
+            <x:Array Type="{x:Type pages:FlyoutMenuItem}">
+                <pages:FlyoutMenuItem Title="Home"
+                                      IconSource="baby.jpg"
+                                      TargetType="{x:Type pages:HomePage}"/>
+                <pages:FlyoutMenuItem Title="Player"
+                                      IconSource="initiate.webp"
+                                      TargetType="{x:Type views:PlayerView}"/>
+                <pages:FlyoutMenuItem Title="Utilities"
+                                      IconSource="dragon.webp"
+                                      TargetType="{x:Type pages:UtilityPage}"/>
+            </x:Array>
+        </CollectionView.ItemsSource>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid Padding="5,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{Binding IconSource}"/>
+                    <Label Grid.Column="1"
+                           Margin="20,0"
+                           Text="{Binding Title}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
